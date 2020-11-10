@@ -2,7 +2,7 @@
   <div class="hello">
     <button @click="test()">test</button>
     <div v-for="(movie, index) in movies" :key="index">{{ movie }}</div>
-    <div>{{ dataFe }}</div>
+    <div>{{ landList }}</div>
   </div>
 </template>
 
@@ -23,37 +23,57 @@ import axios from 'axios'
 // `
 
 // const GET_DATA = gql`
-// query landList {
-//   pageInfo {
-//     hasNextPage
-//     hasPreviousPage
-//     startCursor
-//     endCursor
+// query {
+//   landList {
+//     pageInfo {
+//       hasNextPage
+//       hasPreviousPage
+//       startCursor
+//       endCursor
+//     }
+//     edges {
+//       node {
+//         id
+//         guid
+//         rightSet {
+//           edges {
+//             node {
+//               id
+//             }
+//           }
+//         }
+//       }
+//     }
 //   }
-// }`
+// }
+// `
+
+const GET_DATA = gql`
+query {
+  landList(first: 10) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}`
 
 export default {
   name: 'HelloWorld',
   data () {
     return {
       movies: [],
-      dataFe: []
+      landList: {}
     }
   },
   apollo: {
     // movies: {
     //   query: GET_MOVIES
-    // }
-    dataFe: {
-      query: gql`
-        query landList {
-          pageInfo {
-            hasNextPage
-            hasPreviousPage
-            startCursor
-            endCursor
-          }
-        }`
+    // },
+    landList: {
+      query: GET_DATA
     }
   },
   methods: {

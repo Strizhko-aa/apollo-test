@@ -15,14 +15,14 @@ Vue.config.productionTip = false
 
 const httpLink = new HttpLink({
   // uri: 'https://graphql-harry-potter-api.herokuapp.com/v1alpha1/graphql'
-  uri: 'https://dev.it-thematic.ru/aisumz/ugeoapi/graphql'
+  uri: 'https://dev.it-thematic.ru/aisumz/ugeoapi/graphql/'
 })
 
 const apolloClient = new ApolloClient({
   link: httpLink,
-  fetchOptions: {
-    mode: 'no-cors'
-  },
+  // fetchOptions: {
+  //   mode: 'no-cors'
+  // },
   cache: new InMemoryCache(),
   connectToDevTools: true
 })
